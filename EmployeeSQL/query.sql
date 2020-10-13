@@ -28,8 +28,12 @@ SELECT 	de.dept_no,
 		demg.emp_no,
 		es.last_name,
 		es.first_name
-FROM 	departments as de, dept_manager as demg,employees as es
-ORDER BY (es.last_name, es.first_name); 
+FROM 	departments as de, dept_manager as demg, employees as es
+JOIN 	departments as de
+		ON(de.dept_no = demg.dept_no)
+JOIN	employees as es
+		ON(es.emp_no = demg.emp_no)
+	ORDER BY (es.last_name, es.first_name); 
 		
 -- 4. List the department of each employee with the following information: employee number, last name, first name, and department name.	
 
@@ -40,52 +44,45 @@ SELECT 	es.emp_no,
 FROM 	employees as es, departments as de
 ORDER BY (es.last_name, es.first_name);
 
-
-
-
-
-
-
-
-
-
-
 -- 5. List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
-
-
-
-
-
-
-
-
-
+-- SELECT 	es.first_name,
+-- 		es.last_name,
+-- 		es.sex
+-- FROM	employees as es
+-- WHERE es.first_name = "Hercules"
+--	WHERE es.last_name = 'B%';
 
 
 -- 6. List all employees in the Sales department, including their employee number, last name, first name, and department name.
-
-
-
-
-
-
-
-
+-- SELECT 	es.last_name,
+-- 		es.first_name,
+-- 		dees._emp_no,
+-- 		de.dept_name
+-- FROM employees as es, dept_emp as dees, departments as de
+-- JOIN employees as es
+-- 	ON (es.emp_no = dees.emp_no)
+-- JOIN dept_emp as dees
+-- 	ON (dees.dept_no = de.dept_no)
+-- WHERE dept_name = "Sales"
+-- ORDER BY (es.last_name, es.first_name);
 
 
 
 -- 7. List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
-
-
-
-
-
-
-
-
-
-
+-- SELECT 	es.last_name,
+-- 		es.first_name,
+-- 		dees._emp_no,
+-- 		de.dept_name
+-- FROM employees as es, dept_emp as dees, departments as de
+-- JOIN employees as es
+-- 	ON (es.emp_no = dees.emp_no)
+-- JOIN dept_emp as dees
+-- 	ON (dees.dept_no = de.dept_no)
+-- WHERE dept_name IN ('Sales', 'Development') 
+-- ORDER BY (es.last_name, es.first_name);
 
 -- 8. In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
+-- SELECT * FROM employees
+-- SELECT es.last_name
 
 
