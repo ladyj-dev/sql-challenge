@@ -1,57 +1,34 @@
-CREATE TABLE "departments" (
-    "dept_no" varchar   NOT NULL,
-    "dept_name" varchar   NOT NULL,
-    CONSTRAINT "pk_departments" PRIMARY KEY (
-        "dept_no"
-     )
-);
+departments 
+------------
+dept_no PK varchar
+dept_name varchar
 
+dept_emp
+------------
+emp_no integer PK FK >- employees.emp_no
+dept_no varchar FK >- departments.dept_no
 
-CREATE TABLE "dept_emp" (
-    "emp_no" integer   NOT NULL,
-    "dept_no" varchar   NOT NULL
-);
+dept_manager
+------------
+dept_no varchar FK >- departments.dept_no
+emp_no integer PK FK >- employees.emp_no
 
-CREATE TABLE "dept_manager" (
-    "dept_no" varchar   NOT NULL,
-    "emp_no" integer   NOT NULL
-);
+employees
+------------
+emp_no PK integer 
+emp_title_id varchar FK >- titles.title_id
+birth_date date
+first_name varchar
+last_name varchar
+sex varchar 
+hire_date date
 
-CREATE TABLE "employees" (
-    "emp_no" integer   NOT NULL,
-    "emp_title_id" varchar   NOT NULL,
-    "birth_date" date   NOT NULL,
-    "first_name" varchar   NOT NULL,
-    "last_name" varchar   NOT NULL,
-    "sex" varchar   NOT NULL,
-    "hire_date" date   NOT NULL,
-    CONSTRAINT "pk_employees" PRIMARY KEY (
-        "emp_no"
-     )
-);
+salaries
+------------
+emp_no integer PK FK >- employees.emp_no
+salary integer
 
-CREATE TABLE "salaries" (
-    "emp_no" integer   NOT NULL,
-    "salary" integer   NOT NULL
-);
-
-CREATE TABLE "titles" (
-    "title_id" varchar   NOT NULL,
-    "title" varchar   NOT NULL
-);
-
-ALTER TABLE "dept_emp" ADD CONSTRAINT "fk_dept_emp_emp_no" FOREIGN KEY("emp_no")
-REFERENCES "employees" ("emp_no");
-
-ALTER TABLE "dept_emp" ADD CONSTRAINT "fk_dept_emp_dept_no" FOREIGN KEY("dept_no")
-REFERENCES "departments" ("dept_no");
-
-ALTER TABLE "dept_manager" ADD CONSTRAINT "fk_dept_manager_dept_no" FOREIGN KEY("dept_no")
-REFERENCES "departments" ("dept_no");
-
-ALTER TABLE "dept_manager" ADD CONSTRAINT "fk_dept_manager_emp_no" FOREIGN KEY("emp_no")
-REFERENCES "employees" ("emp_no");
-
-ALTER TABLE "salaries" ADD CONSTRAINT "fk_salaries_emp_no" FOREIGN KEY("emp_no")
-REFERENCES "employees" ("emp_no");
-
+titles
+------------
+title_id PK varchar 
+title varchar

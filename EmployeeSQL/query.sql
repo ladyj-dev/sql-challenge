@@ -31,4 +31,61 @@ SELECT 	de.dept_no,
 FROM 	departments as de, dept_manager as demg,employees as es
 ORDER BY (es.last_name, es.first_name); 
 		
+-- 4. List the department of each employee with the following information: employee number, last name, first name, and department name.	
+
+SELECT 	es.emp_no,
+		es.last_name,
+		es.first_name,
+		de.dept_name
+FROM 	employees as es, departments as de
+ORDER BY (es.last_name, es.first_name);
+
+
+
+
+
+
+
+
+
+
+
+-- 5. List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
+
+
+
+
+
+
+
+
+
+
+
+-- 6. List all employees in the Sales department, including their employee number, last name, first name, and department name.
+
+
+
+
+
+
+
+
+
+
+
+-- 7. List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
+
+
+
+
+
+
+
+
+
+
+
+-- 8. In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
+
 
