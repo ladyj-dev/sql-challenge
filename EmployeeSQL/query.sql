@@ -29,12 +29,14 @@ SELECT 	de.dept_no,
 		demg.emp_no,
 		es.last_name,
 		es.first_name
-FROM 	departments as de, dept_manager as demg, employees as es
-JOIN 	departments as de
+-- FROM 	departments as de, dept_manager as demg, employees as es
+FROM 	departments as de
+JOIN 	dept_manager as demg
 		ON(de.dept_no = demg.dept_no)
-JOIN	employees as es
+FROM 	employees as es
+JOIN	dept_manager as demg
 		ON(es.emp_no = demg.emp_no)
-	ORDER BY (es.last_name, es.first_name); 
+ORDER BY (es.last_name, es.first_name); 
 		
 -- 4. List the department of each employee with the following information: employee number, last name, first name, and department name.	
 
@@ -55,42 +57,34 @@ ORDER BY (es.last_name);
 
 
 -- ***6. List all employees in the Sales department, including their employee number, last name, first name, and department name.
--- SELECT 	es.last_name,
--- 		es.first_name,
--- 		dees._emp_no,
--- 		de.dept_name
--- FROM employees as es, dept_emp as dees, departments as de
--- JOIN employees as es
--- 	ON (es.emp_no = dees.emp_no)
--- JOIN dept_emp as dees
--- 	ON (dees.dept_no = de.dept_no)
--- WHERE dept_name = 'Sales'
--- ORDER BY (es.last_name, es.first_name);
+SELECT 	es.last_name,
+		es.first_name,
+		dpep._emp_no,
+		de.dept_name
+FROM employees as es, dept_emp as dpep, departments as de
+JOIN employees as es
+ON (es.emp_no = dpep.emp_no)
+JOIN dept_emp as dpep
+ON (dpep.dept_no = de.dept_no)
+WHERE dept_name = 'Sales'
+ORDER BY (es.last_name, es.first_name);
 
 
 
 -- ***7. List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
 SELECT 	es.last_name,
  		es.first_name,
- 		dees._emp_no,
+ 		dpep._emp_no,
  		de.dept_name
-FROM employees as es, dept_emp as dees, departments as de
-JOIN employees as es
-ON (es.emp_no = dees.emp_no)
+FROM employees as es, dept_emp as dpep, departments as de
+JOIN dept_emp as dpep
+ON (es.emp_no = dpep.emp_no)
 JOIN dept_emp as dees
-ON (dees.dept_no = de.dept_no)
+ON (dpep.dept_no = de.dept_no)
 WHERE dept_name = 'Sales' OR dept_name 'Development'
 ORDER BY (es.last_name, es.first_name);
 
 -- 8. In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
--- SELECT * FROM employees;
--- SELECT COUNT(DISTINCT last_name) AS "last name count"
--- FROM employees;
--- SELECT last_name, COUNT(last_name) AS "last name count" 
--- FROM employees
--- GROUP BY last_name
--- WHERE last_name is unique
--- ORDER BY "last name count"DESC;
 SELECT last_name, COUNT(*)
 	FROM employees
 	GROUP BY last_name
