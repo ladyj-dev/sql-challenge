@@ -12,13 +12,17 @@ FROM employees as es
 ORDER BY (es.last_name, es.first_name);
 
 -- List first name, last name, and hire date for employees who were hired in 1986
+--could not figure this out, internet directed me to an almost equal example that used date part instead of year which I was initially trying to use
 
--- SELECT 	es.first_name,
--- 		es.last_name,
--- 		es.hire_date 
--- FROM employees as es
--- WHERE 	es.hire_date = 1986
--- ORDER BY (es .last_name, es.first_name);	
+-- SELECT first_name,last_name,hire_date FROM employees WHERE YEAR(hire_date)== 1986;
+-- SELECT *
+
+SELECT 	first_name,
+		last_name,
+		hire_date 
+FROM employees 
+WHERE DATE_PART('year', hire_date) = 1986
+
 
 -- List the manager of each department with the following information: 
 -- department number, department name, the manager's employee number, 
@@ -45,12 +49,12 @@ FROM 	employees as es, departments as de
 ORDER BY (es.last_name, es.first_name);
 
 -- 5. List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
--- SELECT 	es.first_name,
--- 		es.last_name,
--- 		es.sex
--- FROM	employees as es
--- WHERE es.first_name = "Hercules"
---	WHERE es.last_name = 'B%';
+SELECT 	es.first_name,
+		es.last_name,
+		es.sex
+FROM	employees as es
+WHERE es.first_name = "Hercules"
+WHERE es.last_name = 'B%';
 
 
 -- 6. List all employees in the Sales department, including their employee number, last name, first name, and department name.
