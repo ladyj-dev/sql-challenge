@@ -79,7 +79,7 @@ SELECT 	es.last_name,
 FROM employees as es, dept_emp as dpep, departments as de
 JOIN dept_emp as dpep
 ON (es.emp_no = dpep.emp_no)
-JOIN dept_emp as dees
+JOIN dept_emp as dpep
 ON (dpep.dept_no = de.dept_no)
 WHERE dept_name = 'Sales' OR dept_name 'Development'
 ORDER BY (es.last_name, es.first_name);
