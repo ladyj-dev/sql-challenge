@@ -13,18 +13,15 @@ ORDER BY (es.last_name, es.first_name);
 
 -- List first name, last name, and hire date for employees who were hired in 1986
 --could not figure this out, internet directed me to an almost equal example that used date part instead of year which I was initially trying to use
-
--- SELECT first_name,last_name,hire_date FROM employees WHERE YEAR(hire_date)== 1986;
--- SELECT *
-
-SELECT 	first_name,
-		last_name,
-		hire_date 
-FROM employees 
+SELECT 	es.first_name,
+		es.last_name,
+		es.hire_date 
+FROM employees as es 
 WHERE DATE_PART('year', hire_date) = 1986
+ORDER BY (es.last_name, es.first_name);
 
 
--- List the manager of each department with the following information: 
+-- ***List the manager of each department with the following information: 
 -- department number, department name, the manager's employee number, 
 -- last name, first name. 
 SELECT 	de.dept_no,
@@ -53,11 +50,11 @@ SELECT 	es.first_name,
 		es.last_name,
 		es.sex
 FROM	employees as es
-WHERE es.first_name = "Hercules"
-WHERE es.last_name = 'B%';
+WHERE es.first_name = 'Hercules' AND es.last_name LIKE 'B%'
+ORDER BY (es.last_name);
 
 
--- 6. List all employees in the Sales department, including their employee number, last name, first name, and department name.
+-- ***6. List all employees in the Sales department, including their employee number, last name, first name, and department name.
 -- SELECT 	es.last_name,
 -- 		es.first_name,
 -- 		dees._emp_no,
@@ -67,23 +64,23 @@ WHERE es.last_name = 'B%';
 -- 	ON (es.emp_no = dees.emp_no)
 -- JOIN dept_emp as dees
 -- 	ON (dees.dept_no = de.dept_no)
--- WHERE dept_name = "Sales"
+-- WHERE dept_name = 'Sales'
 -- ORDER BY (es.last_name, es.first_name);
 
 
 
--- 7. List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
--- SELECT 	es.last_name,
--- 		es.first_name,
--- 		dees._emp_no,
--- 		de.dept_name
--- FROM employees as es, dept_emp as dees, departments as de
--- JOIN employees as es
--- 	ON (es.emp_no = dees.emp_no)
--- JOIN dept_emp as dees
--- 	ON (dees.dept_no = de.dept_no)
--- WHERE dept_name IN ('Sales', 'Development') 
--- ORDER BY (es.last_name, es.first_name);
+-- ***7. List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
+SELECT 	es.last_name,
+ 		es.first_name,
+ 		dees._emp_no,
+ 		de.dept_name
+FROM employees as es, dept_emp as dees, departments as de
+JOIN employees as es
+ON (es.emp_no = dees.emp_no)
+JOIN dept_emp as dees
+ON (dees.dept_no = de.dept_no)
+WHERE dept_name = 'Sales' OR dept_name 'Development'
+ORDER BY (es.last_name, es.first_name);
 
 -- 8. In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
 -- SELECT * FROM employees;
@@ -97,6 +94,7 @@ WHERE es.last_name = 'B%';
 SELECT last_name, COUNT(*)
 	FROM employees
 	GROUP BY last_name
+	ORDER BY COUNT DESC
 	
 
 
